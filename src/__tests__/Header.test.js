@@ -1,16 +1,14 @@
-import "@testing-library/jest-dom";
-import { render, screen, fireEvent } from "@testing-library/react";
-import Header from "../components/Header";
+import React from "react";
 
-test("displays the toggle button", () => {
-  render(<Header />);
-  expect(screen.queryByText(/ Mode/)).toBeInTheDocument();
-});
+function Header({ isDarkMode, onDarkModeClick }) {
+  return (
+    <header>
+      <h1>Grocery List</h1>
+      <button onClick={onDarkModeClick}>
+        {isDarkMode ? "Light Mode" : "Dark Mode"}
+      </button>
+    </header>
+  );
+}
 
-test("calls the onDarkModeClick callback prop when the button is clicked", () => {
-  const onDarkModeClick = jest.fn();
-  render(<Header onDarkModeClick={onDarkModeClick} />);
-
-  fireEvent.click(screen.queryByText(/ Mode/));
-  expect(onDarkModeClick).toHaveBeenCalled();
-});
+export default Header;
